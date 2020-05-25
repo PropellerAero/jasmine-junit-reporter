@@ -82,17 +82,7 @@ class Suite {
 }
 
 function escapeInvalidXmlChars(testResults) {
-	// preserve newlines, etc - use valid JSON
-	return testResults.replace(/\\n/g, '\\n')
-		.replace(/\\'/g, '\\\'')
-		.replace(/\\"/g, '\\"')
-		.replace(/\\&/g, '\\&')
-		.replace(/\\r/g, '\\r')
-		.replace(/\\t/g, '\\t')
-		.replace(/\\b/g, '\\b')
-		.replace(/\\f/g, '\\f')
-		// remove non-printable and other non-valid JSON chars
-		.replace(/[\u0000-\u0019]+/g, ''); // eslint-disable-line no-control-regex
+	return testResults;
 }
 
 function outputJUnitXML(suites) {
@@ -136,6 +126,8 @@ class JasmineJUnitReporter {
 			// ourSuite.start(); // TODO: restart the timer?
 		} else {
 			ourSuite = new Suite(suite);
+			if (this.currentSuite)
+      			this.currentSuite.addChild(ourSuite);
 			this.suites.set(suite.id, ourSuite);
 		}
 		this.currentSuite = ourSuite;
