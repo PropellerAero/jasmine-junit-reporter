@@ -127,7 +127,7 @@ class JasmineJUnitReporter {
 		} else {
 			ourSuite = new Suite(suite);
 			if (this.currentSuite)
-      			this.currentSuite.addChild(ourSuite);
+	  			this.currentSuite.addChild(ourSuite);
 			this.suites.set(suite.id, ourSuite);
 		}
 		this.currentSuite = ourSuite;
